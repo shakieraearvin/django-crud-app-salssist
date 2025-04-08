@@ -30,7 +30,7 @@ class Accountant(models.Model):
     amount = models.DecimalField(max_digits=10, decimal_places=2)
     date = models.DateField()
     type = models.CharField(max_length=1, choices=TYPE_CHOICES)
-    description = models.TextField()(blank=True)
+    notes = models.TextField(blank=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
