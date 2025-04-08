@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>My Licenses</h1>
+  <a href="{% url 'license-create' %}">+ Add New License</a>
+  <ul>
+    {% for license in object_list %}
+      <li>
+        <a href="{% url 'license-detail' license.pk %}">
+          {{ license.type }} ({{ license.status }})
+        </a>
+      </li>
+    {% empty %}
+      <li>No licenses yet!</li>
+    {% endfor %}
+  </ul>
+{% endblock %}

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Salssist</title>
+</head>
+<body>
+    <nav>
+        {% if user.is_authenticated %}
+          <p>Welcome, {{ user.username }}!</p>
+          <a href="{% url 'license-index' %}">Licenses</a> |
+          <a href="{% url 'logout' %}">Logout</a>
+        {% else %}
+          <a href="{% url 'login' %}">Login</a>
+        {% endif %}
+      </nav>
+      <hr />
+      
+  <hr />
+  {% block content %}
+  {% endblock %}
+</body>
+</html>

@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>{{ license.type }}</h2>
+  <p><strong>Cost:</strong> ${{ license.cost }}</p>
+  <p><strong>Issued:</strong> {{ license.issue_date }}</p>
+  <p><strong>Expires:</strong> {{ license.exp_date }}</p>
+  <p><strong>Status:</strong> {{ license.get_status_display }}</p>
+  {% if license.document %}
+    <p><a href="{{ license.document.url }}" target="_blank">View Document</a></p>
+  {% endif %}
+
+  <a href="{% url 'license-update' license.pk %}">Edit</a> |
+  <a href="{% url 'license-delete' license.pk %}">Delete</a> |
+  <a href="{% url 'license-index' %}">Back to List</a>
+{% endblock %}
