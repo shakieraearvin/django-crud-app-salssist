@@ -1,0 +1,64 @@
+:root {
+    --charcoal: #2D2D2D;
+    --sage: #C5D7C5;
+    --bone: #F6F6F6;
+    --plum: #5C3A58;
+    --olive: #3D4F45;
+  
+    --text-color: var(--charcoal);
+    --link-hover-color: var(--plum);
+    --button-bg: var(--sage);
+    --button-bg-hover: #b4c9b4;
+  
+    --card-box-shadow: 5px 5px 6px -1px #aaa;
+    --card-border-radius: 1.2rem;
+  
+    --font-xl: 2.4rem;
+    --font-l: 1.8rem;
+    --font-reg: 1.6rem;
+  }
+  body {
+    font-family: 'Segoe UI', sans-serif;
+    background-color: var(--bone);
+    color: var(--text-color);
+    margin: 0;
+    padding: 0;
+  }
+  
+  h1, h2, h3 {
+    color: var(--plum);
+  }
+  
+  a {
+    color: var(--plum);
+    text-decoration: none;
+  }
+  
+  a:hover {
+    color: var(--olive);
+  }
+  
+  button,
+  .btn {
+    background-color: var(--button-bg);
+    border: none;
+    padding: 10px 16px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  button:hover,
+  .btn:hover {
+    background-color: var(--button-bg-hover);
+  }
+  
+  .card {
+    background: white;
+    border-radius: var(--card-border-radius);
+    padding: 20px;
+    box-shadow: var(--card-box-shadow);
+    margin-bottom: 20px;
+  }
+  
