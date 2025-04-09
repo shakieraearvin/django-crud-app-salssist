@@ -54,6 +54,37 @@
   .btn:hover {
     background-color: var(--button-bg-hover);
   }
+
+  /* Plum button (used for Edit) */
+.btn.plum {
+  background-color: var(--plum);
+  color: white;
+}
+
+.btn.plum:hover {
+  background-color: #4a2e46;
+}
+
+/* Sage button (used for Delete) */
+.btn.sage {
+  background-color: var(--sage);
+  color: var(--charcoal);
+  border: 1px solid var(--charcoal);
+}
+
+.btn.sage:hover {
+  background-color: var(--button-bg-hover);
+}
+
+.btn.secondary {
+  background-color: var(--olive);
+  color: white;
+}
+
+.btn.secondary:hover {
+  background-color: #2f3c34;
+}
+
   .form {
   background: white;
   padding: 24px;
@@ -92,30 +123,10 @@ button[type="submit"] {
   text-transform: capitalize;
 }
 
-/* Action Buttons under detail views */
 .action-buttons {
   display: flex;
   gap: 12px;
   margin-top: 20px;
-}
-
-/* Danger and Secondary buttons (custom styles) */
-.btn.danger {
-  background-color: var(--plum);
-  color: white;
-}
-
-.btn.danger:hover {
-  background-color: #4a2e46;
-}
-
-.btn.secondary {
-  background-color: var(--olive);
-  color: white;
-}
-
-.btn.secondary:hover {
-  background-color: #2f3c34;
 }
 
 /* Page header styling */
@@ -127,3 +138,4 @@ button[type="submit"] {
   font-size: var(--font-xl);
   margin: 0;
 }
+

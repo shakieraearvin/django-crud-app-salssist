@@ -18,8 +18,15 @@
     </div>
 
     <div class="action-buttons" style="margin-top:">
-  <a href="{% url 'license-update' license.pk %}">Edit</a> |
-  <a href="{% url 'license-delete' license.pk %}">Delete</a> |
-  <a href="{% url 'license-index' %}">Back to List</a>
+      <a href="{% url 'license-update' license.pk %}" class="btn plum">
+        ✏️ Edit
+      </a>
+      <a href="{% url 'license-delete' license.pk %}" class="btn sage">
+        🗑️ Delete
+      </a>
+      <a href="{% url 'license-index' %}" class="btn secondary">
+        ← Back
+      </a>
+      
     </div>
 {% endblock %}
