@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>{{ accountant.get_type_display }} Entry</h2>
+  <p><strong>Amount:</strong> ${{ accountant.amount }}</p>
+  <p><strong>Date:</strong> {{ accountant.date }}</p>
+  {% if accountant.source %}
+    <p><strong>Source:</strong> {{ accountant.source }}</p>
+  {% endif %}
+  {% if accountant.notes %}
+    <p><strong>Notes:</strong> {{ accountant.notes }}</p>
+  {% endif %}
+  {% if accountant.receipt %}
+  <p><strong>Receipt:</strong> 
+    <a href="{{ accountant.receipt.url }}" target="_blank">View Receipt</a>
+  </p>
+{% endif %}
+
+
+  <a href="{% url 'accounting-update' accountant.pk %}">Edit</a> |
+  <a href="{% url 'accounting-delete' accountant.pk %}">Delete</a> |
+  <a href="{% url 'accounting-index' %}">Back to List</a>
+{% endblock %}

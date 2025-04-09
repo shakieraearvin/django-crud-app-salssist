@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>{{ checklist.title }}</h2>
+  <p><strong>Status:</strong> {{ checklist.get_status_display }}</p>
+  {% if checklist.notes %}
+    <p><strong>Notes:</strong> {{ checklist.notes }}</p>
+  {% endif %}
+
+  <a href="{% url 'checklist-update' checklist.pk %}">Edit</a> |
+  <a href="{% url 'checklist-delete' checklist.pk %}">Delete</a> |
+  <a href="{% url 'checklist-index' %}">Back to List</a>
+{% endblock %}

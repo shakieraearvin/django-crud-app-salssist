@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Accounting Overview</h1>
+  <a href="{% url 'accounting-create' %}">+ Add Entry</a>
+
+  <ul>
+    {% for item in object_list %}
+      <li>
+        <a href="{% url 'accounting-detail' item.pk %}">
+          {{ item.get_type_display }} - ${{ item.amount }} on {{ item.date }}
+        </a>
+      </li>
+    {% empty %}
+      <li>No income or expense entries yet.</li>
+    {% endfor %}
+  </ul>
+{% endblock %}

@@ -5,7 +5,7 @@ from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 
-from .models import License
+from .models import License, Checklist, Accountant
 
 
 # Create your views here.
@@ -54,6 +54,97 @@ class LicenseDelete(LoginRequiredMixin, DeleteView):
     def get_queryset(self):
         return License.objects.filter(user=self.request.user)
 
+
+class ChecklistList(LoginRequiredMixin, ListView):
+    model = Checklist
+    template_name = 'checklists/index.html'
+
+    def get_queryset(self):
+        return Checklist.objects.filter(user=self.request.user)
+
+
+class ChecklistDetail(LoginRequiredMixin, DetailView):
+    model = Checklist
+    template_name = 'checklists/detail.html'
+
+    def get_queryset(self):
+        return Checklist.objects.filter(user=self.request.user)
+
+
+class ChecklistCreate(LoginRequiredMixin, CreateView):
+    model = Checklist
+    fields = ['title', 'status', 'notes', 'date']
+    template_name = 'checklists/form.html'
+    success_url = '/checklists/'
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
+
+
+class ChecklistUpdate(LoginRequiredMixin, UpdateView):
+    model = Checklist
+    fields = ['title', 'status', 'notes', 'date']
+    template_name = 'checklists/form.html'
+    success_url = '/checklists/'
+
+    def get_queryset(self):
+        return Checklist.objects.filter(user=self.request.user)
+
+
+class ChecklistDelete(LoginRequiredMixin, DeleteView):
+    model = Checklist
+    template_name = 'checklists/delete_confirm.html'
+    success_url = '/checklists/'
+
+    def get_queryset(self):
+        return Checklist.objects.filter(user=self.request.user)
+
+
+class AccountantList(LoginRequiredMixin, ListView):
+    model = Accountant
+    template_name = 'accountants/index.html'
+
+    def get_queryset(self):
+        return Accountant.objects.filter(user=self.request.user)
+
+
+class AccountantDetail(LoginRequiredMixin, DetailView):
+    model = Accountant
+    template_name = 'accountants/detail.html'
+
+    def get_queryset(self):
+        return Accountant.objects.filter(user=self.request.user)
+
+
+class AccountantCreate(LoginRequiredMixin, CreateView):
+    model = Accountant
+    fields = ['type', 'name', 'amount', 'date', 'source', 'notes', 'receipt']
+    template_name = 'accountants/form.html'
+    success_url = '/accounting/'
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
+
+
+class AccountantUpdate(LoginRequiredMixin, UpdateView):
+    model = Accountant
+    fields = ['type', 'name', 'amount', 'date', 'source', 'notes', 'receipt']
+    template_name = 'accountants/form.html'
+    success_url = '/accounting/'
+
+    def get_queryset(self):
+        return Accountant.objects.filter(user=self.request.user)
+
+
+class AccountantDelete(LoginRequiredMixin, DeleteView):
+    model = Accountant
+    template_name = 'accountants/delete_confirm.html'
+    success_url = '/accounting/'
+
+    def get_queryset(self):
+        return Accountant.objects.filter(user=self.request.user)
 
 def signup(request):
     error_message = ''

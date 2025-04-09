@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>My Checklist</h1>
+  <a href="{% url 'checklist-create' %}">+ Add Checklist Item</a>
+  <ul>
+    {% for item in object_list %}
+      <li>
+        <a href="{% url 'checklist-detail' item.pk %}">
+          {{ item.title }} ({{ item.get_status_display }})
+        </a>
+      </li>
+    {% empty %}
+      <li>No checklist items yet!</li>
+    {% endfor %}
+  </ul>
+{% endblock %}

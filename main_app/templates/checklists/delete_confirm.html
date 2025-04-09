@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Delete Checklist Item: "{{ checklist.title }}"?</h2>
+
+  <form method="POST">
+    {% csrf_token %}
+    <button type="submit">Yes, delete</button>
+  </form>
+
+  <a href="{% url 'checklist-detail' checklist.pk %}">Cancel</a>
+{% endblock %}

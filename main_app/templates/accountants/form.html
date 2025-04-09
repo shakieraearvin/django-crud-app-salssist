@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>{% if form.instance.pk %}Edit{% else %}Add{% endif %} Accounting Entry</h2>
+
+  <form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Save</button>
+  </form>
+
+  <a href="{% url 'accounting-index' %}">Cancel</a>
+{% endblock %}
