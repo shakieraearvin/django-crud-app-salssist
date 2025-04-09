@@ -2,16 +2,21 @@
 
 {% block content %}
   <h1>My Licenses</h1>
-  <a href="{% url 'license-create' %}">+ Add New License</a>
-  <ul>
-    {% for license in object_list %}
-      <li>
-        <a href="{% url 'license-detail' license.pk %}">
-          {{ license.type }} ({{ license.status }})
-        </a>
-      </li>
-    {% empty %}
-      <li>No licenses yet!</li>
-    {% endfor %}
-  </ul>
+  <a href="{% url 'license-create' %}" class="btn">+ Add License</a>
+
+  {% for license in licenses %}
+    <div class="card">
+      <h3><a href="{% url 'license-detail' license.pk %}">
+        {{ license.type }}
+      </a></h3>
+      <p>Status: {{ license.get_status_display }}</p>
+      <p>Expires: {{ license.exp_date }}</p>
+      <a href="{% url 'license-detail' license.id %}" class="btn">View</a>
+    </div>
+  {% empty %}
+    <p>No licenses yet.</p>
+  {% endfor %}
 {% endblock %}
+
+
+

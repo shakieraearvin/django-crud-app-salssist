@@ -7,11 +7,16 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 
 from .models import License, Checklist, Accountant
 
+def home(request):
+    return render(request, 'home.html')
+
 
 # Create your views here.
 class LicenseList(LoginRequiredMixin, ListView):
     model = License
     template_name = 'licenses/index.html'
+    context_object_name = 'licenses'
+
 
     def get_queryset(self):
         return License.objects.filter(user=self.request.user)
@@ -24,16 +29,24 @@ class LicenseDetail(LoginRequiredMixin, DetailView):
     def get_queryset(self):
         return License.objects.filter(user=self.request.user)
 
-
 class LicenseCreate(LoginRequiredMixin, CreateView):
     model = License
     fields = ['type', 'cost', 'issue_date', 'exp_date', 'status', 'document']
     template_name = 'licenses/form.html'
     success_url = '/licenses/'
 
+
     def form_valid(self, form):
         form.instance.user = self.request.user
         return super().form_valid(form)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['form_title'] = 'Add New License'
+        context['cancel_url'] = '/licenses/'
+        return context
+
+       
 
 
 class LicenseUpdate(LoginRequiredMixin, UpdateView):

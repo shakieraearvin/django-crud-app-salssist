@@ -3,11 +3,13 @@
 {% block content %}
   <h2>{% if form.instance.pk %}Edit{% else %}Create{% endif %} License</h2>
 
-  <form method="POST" enctype="multipart/form-data">
+  <form method="POST" enctype="multipart/form-data" class="form">
     {% csrf_token %}
     {{ form.as_p }}
-    <button type="submit">Save</button>
+    <button type="submit" class="btn">Save</button>
+    <a href="{{ cancel_url }}" class="btn secondary">Cancel</a>
   </form>
 
-  <a href="{% url 'license-index' %}">Cancel</a>
+  
 {% endblock %}
+
