@@ -150,6 +150,12 @@ class AccountantUpdate(LoginRequiredMixin, UpdateView):
     def get_queryset(self):
         return Accountant.objects.filter(user=self.request.user)
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['form_title'] = 'Edit Transaction'
+        context['cancel_url'] = f"/accounting/{self.object.pk}/"
+        return context
+
 
 class AccountantDelete(LoginRequiredMixin, DeleteView):
     model = Accountant

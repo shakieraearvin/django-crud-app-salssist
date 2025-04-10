@@ -1,18 +1,19 @@
 {% extends 'base.html' %}
-
 {% block content %}
-  <h1>Accounting Overview</h1>
-  <a href="{% url 'accounting-create' %}">+ Add Entry</a>
-
-  <ul>
-    {% for item in object_list %}
-      <li>
-        <a href="{% url 'accounting-detail' item.pk %}">
-          {{ item.get_type_display }} - ${{ item.amount }} on {{ item.date }}
-        </a>
-      </li>
+  <div class="container">
+    <div class="page-header">
+      <h1>Transactions</h1>
+      <a href="{% url 'accountant-create' %}" class="btn plum">+ Add Transaction</a>
+    </div>
+    {% for accountant in accountant_list %}
+      <div class="card">
+        <h2>{{ accountant.name }}</h2>
+        <span class="status-tag">{{ accountant.get_type_display }}</span>
+        <p><strong>Amount:</strong> ${{ accountant.amount }}</p>
+        <p><a href="{% url 'accountant-detail' accountant.pk %}" class="btn secondary">View</a></p>
+      </div>
     {% empty %}
-      <li>No income or expense entries yet.</li>
+      <p>No transactions added yet.</p>
     {% endfor %}
-  </ul>
+  </div>
 {% endblock %}

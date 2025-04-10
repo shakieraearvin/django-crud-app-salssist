@@ -17,7 +17,50 @@
     --font-l: 1.8rem;
     --font-reg: 1.6rem;
   }
-  
+  /* Header/Navbar */
+.navbar {
+  background-color: var(--sage);
+  border-bottom: 2px solid var(--olive);
+  padding: 16px 0;
+  margin-bottom: 24px;
+}
+
+.nav-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.logo {
+  font-size: var(--font-l);
+  font-weight: bold;
+  color: var(--plum);
+  text-decoration: none;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: var(--charcoal);
+  font-weight: 600;
+  font-size: 1.6rem;
+  transition: color 0.2s ease;
+}
+
+.nav-links a:hover {
+  color: var(--plum);
+}
+
   body {
     font-family: 'Segoe UI', sans-serif;
     background-color: var(--bone);

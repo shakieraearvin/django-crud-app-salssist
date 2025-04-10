@@ -1,13 +1,16 @@
 {% extends 'base.html' %}
-
 {% block content %}
-  <h2>{{ checklist.title }}</h2>
-  <p><strong>Status:</strong> {{ checklist.get_status_display }}</p>
-  {% if checklist.notes %}
-    <p><strong>Notes:</strong> {{ checklist.notes }}</p>
-  {% endif %}
-
-  <a href="{% url 'checklist-update' checklist.pk %}">Edit</a> |
-  <a href="{% url 'checklist-delete' checklist.pk %}">Delete</a> |
-  <a href="{% url 'checklist-index' %}">Back to List</a>
+  <div class="container">
+    <div class="card">
+      <h2>{{ checklist.title }}</h2>
+      <span class="status-tag">{{ checklist.get_status_display }}</span>
+      <p><strong>Notes:</strong> {{ checklist.notes }}</p>
+      <p><strong>Date:</strong> {{ checklist.date }}</p>
+      <div class="action-buttons">
+        <a href="{% url 'checklist-update' checklist.pk %}" class="btn plum">Edit</a>
+        <a href="{% url 'checklist-delete' checklist.pk %}" class="btn sage">Delete</a>
+        <a href="{% url 'checklist-index' %}" class="btn secondary">← Back</a>
+      </div>
+    </div>
+  </div>
 {% endblock %}

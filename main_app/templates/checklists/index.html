@@ -1,17 +1,19 @@
 {% extends 'base.html' %}
-
 {% block content %}
-  <h1>My Checklist</h1>
-  <a href="{% url 'checklist-create' %}">+ Add Checklist Item</a>
-  <ul>
-    {% for item in object_list %}
-      <li>
-        <a href="{% url 'checklist-detail' item.pk %}">
-          {{ item.title }} ({{ item.get_status_display }})
-        </a>
-      </li>
+  <div class="container">
+    <div class="page-header">
+      <h1>Checklist</h1>
+      <a href="{% url 'checklist-create' %}" class="btn plum">+ Add Item</a>
+    </div>
+    {% for checklist in checklist_list %}
+      <div class="card">
+        <h2>{{ checklist.title }}</h2>
+        <span class="status-tag">{{ checklist.get_status_display }}</span>
+        <p>{{ checklist.notes }}</p>
+        <a href="{% url 'checklist-detail' checklist.pk %}" class="btn secondary">View</a>
+      </div>
     {% empty %}
-      <li>No checklist items yet!</li>
+      <p>No checklist items added yet.</p>
     {% endfor %}
-  </ul>
+  </div>
 {% endblock %}
