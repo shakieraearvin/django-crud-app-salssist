@@ -1,3 +1,4 @@
+from django.db import models
 from django.shortcuts import render, redirect
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
@@ -7,8 +8,28 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 
 from .models import License, Checklist, Accountant
 
+from django.contrib.auth.decorators import login_required
+from django.utils import timezone
+from datetime import date
+from django.db.models import Sum
+
+@login_required
 def home(request):
-    return render(request, 'home.html')
+    licenses = License.objects.filter(user=request.user)
+    checklists = Checklist.objects.filter(user=request.user)
+    accountants = Accountant.objects.filter(user=request.user)
+
+    # Summarize accounting
+    income_total = accountants.filter(type='I', date__month=date.today().month).aggregate(Sum('amount'))['amount__sum'] or 0
+    expense_total = accountants.filter(type='E', date__month=date.today().month).aggregate(Sum('amount'))['amount__sum'] or 0
+
+    return render(request, 'home.html', {
+        'license_count': licenses.count(),
+        'checklist_required': checklists.filter(status='R').count(),
+        'checklist_progress': checklists.filter(status='I').count(),
+        'income_total': income_total,
+        'expense_total': expense_total
+    })
 
 
 # Create your views here.
@@ -47,8 +68,6 @@ class LicenseCreate(LoginRequiredMixin, CreateView):
         return context
 
        
-
-
 class LicenseUpdate(LoginRequiredMixin, UpdateView):
     model = License
     fields = ['type', 'cost', 'issue_date', 'exp_date', 'status', 'document']
@@ -69,11 +88,32 @@ class LicenseDelete(LoginRequiredMixin, DeleteView):
 
 
 class ChecklistList(LoginRequiredMixin, ListView):
+    STATUS_CHOICES = [
+    ('R', 'Required'),
+    ('I', 'In Progress'),
+    ('C', 'Completed'),
+]
+
+    status = models.CharField(max_length=1, choices=STATUS_CHOICES)
     model = Checklist
     template_name = 'checklists/index.html'
+    context_object_name = 'checklists'
 
     def get_queryset(self):
+        queryset = Checklist.objects.filter(user=self.request.user)
+        status = self.request.GET.get('status')
+        if status:
+            queryset = queryset.filter(status=status)
+        print("QUERYSET:", queryset)
         return Checklist.objects.filter(user=self.request.user)
+
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['selected_status'] = self.request.GET.get('status', '')
+        return context
+
+
 
 
 class ChecklistDetail(LoginRequiredMixin, DetailView):

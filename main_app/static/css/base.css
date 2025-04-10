@@ -191,3 +191,10 @@ button[type="submit"] {
   font-size: 1.4rem;
   line-height: 1;
 }
+select#status {
+  padding: 8px;
+  font-size: 1.6rem;
+  margin-bottom: 20px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}

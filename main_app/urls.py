@@ -20,3 +20,6 @@ urlpatterns = [
     path('accounting/<int:pk>/delete/', views.AccountantDelete.as_view(), name='accountant-delete'),
     path('accounts/signup/', views.signup, name='signup'),
 ]
+from django.contrib import admin
+from django.urls import path, include
+

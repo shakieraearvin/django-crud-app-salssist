@@ -1,7 +1,28 @@
 {% extends 'base.html' %}
 {% block content %}
-  <div class="container">
-    <h1>Welcome to Salssist 👋🏽</h1>
+  <div class="card">
+    <h1>Welcome to Salssist, {{ user.username }} 👋🏽</h1>
     <p>Your beauty biz assistant, reimagined.</p>
+
+    <hr>
+
+    <h2>📋 Quick Overview</h2>
+    <ul>
+      <li><strong>{{ license_count }}</strong> licenses saved</li>
+      <li><strong>{{ checklist_required }}</strong> required checklist items</li>
+      <li><strong>{{ checklist_progress }}</strong> in progress</li>
+    </ul>
+
+    <h2>💰 This Month’s Finances</h2>
+    <ul>
+      <li><strong>${{ income_total }}</strong> income</li>
+      <li><strong>${{ expense_total }}</strong> expenses</li>
+    </ul>
+
+    <div class="action-buttons">
+      <a href="{% url 'license-create' %}" class="btn plum">+ Add License</a>
+      <a href="{% url 'checklist-create' %}" class="btn secondary">+ Add Checklist</a>
+      <a href="{% url 'accountant-create' %}" class="btn sage">+ Log Income/Expense</a>
+    </div>
   </div>
 {% endblock %}
