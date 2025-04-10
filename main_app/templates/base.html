@@ -16,10 +16,15 @@
         <li><a href="{% url 'checklist-index' %}">Checklist</a></li>
         <li><a href="{% url 'accountant-index' %}">Accounting</a></li>
         {% if user.is_authenticated %}
-          <li><a href="{% url 'logout' %}">Logout</a></li>
+        <form action="{% url 'logout' %}" method="POST" style="display:inline;">
+          {% csrf_token %}
+          <button type="submit" class="btn">Logout</button>
+        </form>
         {% else %}
-          <li><a href="{% url 'login' %}">Login</a></li>
-        {% endif %}
+        <li><a href="{% url 'login' %}" class="btn secondary nav-small">Login</a></li>
+
+      {% endif %}
+      
       </ul>
     </nav>
   </div>

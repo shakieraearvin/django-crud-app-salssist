@@ -1,23 +1,32 @@
 :root {
-    --charcoal: #2D2D2D;
-    --sage: #C5D7C5;
-    --bone: #F6F6F6;
-    --plum: #5C3A58;
-    --olive: #3D4F45;
-  
-    --text-color: var(--charcoal);
-    --link-hover-color: var(--plum);
-    --button-bg: var(--sage);
-    --button-bg-hover: #b4c9b4;
-  
-    --card-box-shadow: 5px 5px 6px -1px #aaa;
-    --card-border-radius: 1.2rem;
-  
-    --font-xl: 2.4rem;
-    --font-l: 1.8rem;
-    --font-reg: 1.6rem;
-  }
-  /* Header/Navbar */
+  --charcoal: #2D2D2D;
+  --sage: #C5D7C5;
+  --bone: #F6F6F6;
+  --plum: #5C3A58;
+  --olive: #3D4F45;
+
+  --text-color: var(--charcoal);
+  --link-hover-color: var(--plum);
+  --button-bg: var(--sage);
+  --button-bg-hover: #b4c9b4;
+
+  --card-box-shadow: 5px 5px 6px -1px #aaa;
+  --card-border-radius: 1.2rem;
+
+  --font-xl: 2.4rem;
+  --font-l: 1.8rem;
+  --font-reg: 1.6rem;
+}
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background-color: var(--bone);
+  color: var(--text-color);
+  margin: 0;
+  padding: 0;
+}
+
+/* NAVBAR */
 .navbar {
   background-color: var(--sage);
   border-bottom: 2px solid var(--olive);
@@ -61,44 +70,38 @@
   color: var(--plum);
 }
 
-  body {
-    font-family: 'Segoe UI', sans-serif;
-    background-color: var(--bone);
-    color: var(--text-color);
-    margin: 0;
-    padding: 0;
-  }
-  
-  .container {
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 20px;
-  }
-  
-  .card {
-    background: white;
-    border-radius: var(--card-border-radius);
-    padding: 20px;
-    box-shadow: var(--card-box-shadow);
-    margin-bottom: 20px;
-  }
-  
-  .btn {
-    display: inline-block;
-    background-color: var(--button-bg);
-    padding: 8px 16px;
-    border-radius: 6px;
-    font-weight: 600;
-    color: var(--text-color);
-    text-decoration: none;
-    transition: background-color 0.3s ease;
-  }
-  
-  .btn:hover {
-    background-color: var(--button-bg-hover);
-  }
+/* CONTAINER */
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px;
+}
 
-  /* Plum button (used for Edit) */
+/* CARD */
+.card {
+  background: white;
+  border-radius: var(--card-border-radius);
+  padding: 20px;
+  box-shadow: var(--card-box-shadow);
+  margin-bottom: 20px;
+}
+
+/* BUTTONS */
+.btn {
+  display: inline-block;
+  background-color: var(--button-bg);
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-weight: 600;
+  color: var(--text-color);
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+  background-color: var(--button-bg-hover);
+}
+
 .btn.plum {
   background-color: var(--plum);
   color: white;
@@ -108,7 +111,6 @@
   background-color: #4a2e46;
 }
 
-/* Sage button (used for Delete) */
 .btn.sage {
   background-color: var(--sage);
   color: var(--charcoal);
@@ -128,7 +130,8 @@
   background-color: #2f3c34;
 }
 
-  .form {
+/* FORM */
+.form {
   background: white;
   padding: 24px;
   border-radius: var(--card-border-radius);
@@ -139,9 +142,9 @@
 input[type="text"],
 input[type="date"],
 input[type="number"],
+input[type="file"],
 textarea,
-select,
-input[type="file"] {
+select {
   width: 100%;
   padding: 10px;
   margin-bottom: 16px;
@@ -154,7 +157,7 @@ button[type="submit"] {
   margin-right: 10px;
 }
 
-/* Status Tag (for license status like Active, Expiring, Pending) */
+/* STATUS TAGS */
 .status-tag {
   display: inline-block;
   padding: 4px 10px;
@@ -166,13 +169,14 @@ button[type="submit"] {
   text-transform: capitalize;
 }
 
+/* ACTION BUTTONS */
 .action-buttons {
   display: flex;
   gap: 12px;
   margin-top: 20px;
 }
 
-/* Page header styling */
+/* PAGE HEADER */
 .page-header {
   margin-bottom: 24px;
 }
@@ -181,4 +185,9 @@ button[type="submit"] {
   font-size: var(--font-xl);
   margin: 0;
 }
-
+/* Small nav button */
+.btn.nav-small {
+  padding: 6px 12px;
+  font-size: 1.4rem;
+  line-height: 1;
+}
