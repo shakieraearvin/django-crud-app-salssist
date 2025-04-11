@@ -88,13 +88,6 @@ class LicenseDelete(LoginRequiredMixin, DeleteView):
 
 
 class ChecklistList(LoginRequiredMixin, ListView):
-    STATUS_CHOICES = [
-    ('R', 'Required'),
-    ('I', 'In Progress'),
-    ('C', 'Completed'),
-]
-
-    status = models.CharField(max_length=1, choices=STATUS_CHOICES)
     model = Checklist
     template_name = 'checklists/index.html'
     context_object_name = 'checklists'
@@ -104,8 +97,9 @@ class ChecklistList(LoginRequiredMixin, ListView):
         status = self.request.GET.get('status')
         if status:
             queryset = queryset.filter(status=status)
-        print("QUERYSET:", queryset)
-        return Checklist.objects.filter(user=self.request.user)
+            print("QUERYSET:", queryset)
+        return queryset
+        
 
 
     def get_context_data(self, **kwargs):
