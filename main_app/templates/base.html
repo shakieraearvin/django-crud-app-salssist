@@ -5,13 +5,17 @@
     <meta charset="UTF-8">
     <title>Salssist</title>
     <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <link rel="icon" href="{% static 'images/favicon.ico' %}">
   </head>
   <body>
-<header class="navbar">
-  <div class="container nav-inner">
-    <ul class="home-link"><a href="{% url 'home' %}">Home</a></ul>
-    <nav>
-      <ul class="nav-links">
+    <header class="navbar">
+      <div class="container nav-inner">
+        <a href="{% url 'home' %}" class="logo-link">
+          <img src="{% static 'images/salssist-logo.svg' %}" alt="Salssist Logo" class="logo-img">
+        </a>
+    
+        <nav>
+          <ul class="nav-links">
         <li><a href="{% url 'dashboard' %}">DashBoard</a></li>
         <li><a href="{% url 'license-index' %}">Licenses</a></li>
         <li><a href="{% url 'checklist-index' %}">Checklist</a></li>

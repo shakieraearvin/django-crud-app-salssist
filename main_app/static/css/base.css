@@ -36,12 +36,13 @@ body {
 
 .nav-inner {
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between; /* Pushes left and right content apart */
   max-width: 900px;
   margin: 0 auto;
   padding: 0 20px;
 }
+
 
 .logo {
   font-size: var(--font-l);
@@ -70,14 +71,14 @@ body {
   color: var(--plum);
 }
 
-/* CONTAINER */
+
 .container {
   max-width: 900px;
   margin: 0 auto;
   padding: 20px;
 }
 
-/* CARD */
+
 .card {
   background: white;
   border-radius: var(--card-border-radius);
@@ -86,7 +87,7 @@ body {
   margin-bottom: 20px;
 }
 
-/* BUTTONS */
+
 .btn {
   display: inline-block;
   background-color: var(--button-bg);
@@ -253,3 +254,15 @@ select#status {
 .spacer {
   margin-bottom: 24px;
 }
+.logo-img {
+  height: 280px; 
+  object-fit: contain;
+}
+
+.logo-link {
+  display: flex;
+  align-items: center;
+  margin-right: auto;
+  padding-left: 10px; 
+}
+
