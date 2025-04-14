@@ -10,6 +10,7 @@ from .models import License, Checklist, Accountant
 
 from django.contrib.auth.decorators import login_required
 from django.utils import timezone
+from datetime import timedelta
 from datetime import date
 from django.db.models import Sum
 
@@ -30,6 +31,36 @@ def home(request):
         'income_total': income_total,
         'expense_total': expense_total
     })
+
+@login_required
+def dashboard(request):
+    user = request.user
+
+    total_licenses = License.objects.filter(user=user).count()
+
+    # Expiring in next 30 days
+    today = timezone.now().date()
+    soon = today + timedelta(days=30)
+    expiring_licenses = License.objects.filter(user=user, exp_date__range=[today, soon]).count()
+
+    total_checklist = Checklist.objects.filter(user=user).count()
+    completed_checklist = Checklist.objects.filter(user=user, status='C').count()
+
+    income_total = Accountant.objects.filter(user=user, type='Income').aggregate(total=models.Sum('amount'))['total'] or 0
+    expense_total = Accountant.objects.filter(user=user, type='Expense').aggregate(total=models.Sum('amount'))['total'] or 0
+    net_total = income_total - expense_total
+
+    context = {
+        'total_licenses': total_licenses,
+        'expiring_licenses': expiring_licenses,
+        'total_checklist': total_checklist,
+        'completed_checklist': completed_checklist,
+        'income_total': income_total,
+        'expense_total': expense_total,
+        'net_total': net_total,
+    }
+
+    return render(request, 'dashboard.html', context)
 
 
 # Create your views here.
@@ -151,9 +182,29 @@ class ChecklistDelete(LoginRequiredMixin, DeleteView):
 class AccountantList(LoginRequiredMixin, ListView):
     model = Accountant
     template_name = 'accountants/index.html'
+    context_object_name = 'accountants'
 
     def get_queryset(self):
-        return Accountant.objects.filter(user=self.request.user)
+        queryset = Accountant.objects.filter(user=self.request.user)
+
+        type_filter = self.request.GET.get('type')
+        sort = self.request.GET.get('sort')
+
+        if type_filter in ['Income', 'Expense']:
+            queryset = queryset.filter(type=type_filter)
+
+        if sort == 'amount':
+            queryset = queryset.order_by('-amount')
+        elif sort == 'date':
+            queryset = queryset.order_by('-date')
+
+        return queryset
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['selected_type'] = self.request.GET.get('type', '')
+        context['selected_sort'] = self.request.GET.get('sort', '')
+        return context
 
 
 class AccountantDetail(LoginRequiredMixin, DetailView):

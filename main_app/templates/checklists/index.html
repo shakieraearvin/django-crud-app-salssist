@@ -5,7 +5,8 @@
       <h1>Checklist</h1>
       <a href="{% url 'checklist-create' %}" class="btn plum">+ Add Item</a>
     </div>
-    <form method="get">
+
+    <form method="get" class="form">
       <label for="status"><strong>Filter by Status:</strong></label>
       <select name="status" id="status" onchange="this.form.submit()">
         <option value="">All</option>
@@ -14,7 +15,8 @@
         <option value="C" {% if selected_status == 'C' %}selected{% endif %}>Completed</option>
       </select>
     </form>
-    {% for checklist in checklist_list %}
+
+    {% for checklist in checklists %}
       <div class="card">
         <h2>{{ checklist.title }}</h2>
         <span class="status-tag">{{ checklist.get_status_display }}</span>

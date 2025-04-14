@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% block content %}
+  <div class="page-header">
+    <h1>Quick Overview</h1>
+    <p class="subtitle">Your beauty business at a glance ✨</p>
+  </div>
+
+  <div class="card">
+    <h2>Licenses</h2>
+    <p><strong>Total:</strong> {{ total_licenses }}</p>
+    <p><strong>Expiring Soon:</strong> {{ expiring_licenses }}</p>
+  </div>
+
+  <div class="card">
+    <h2>Checklist</h2>
+    <p><strong>Completed:</strong> {{ completed_checklist }} of {{ total_checklist }}</p>
+  </div>
+
+  <div class="card">
+    <h2>Accounting</h2>
+    <p><strong>Income:</strong> ${{ income_total }}</p>
+    <p><strong>Expenses:</strong> ${{ expense_total }}</p>
+    <p><strong>Net:</strong> ${{ net_total }}</p>
+
+    <canvas id="accountingChart" width="400" height="200"></canvas>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    const ctx = document.getElementById('accountingChart').getContext('2d');
+    const accountingChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: ['Income', 'Expenses'],
+        datasets: [{
+          label: 'Amount ($)',
+          data: [{{ income_total }}, {{ expense_total }}],
+          backgroundColor: ['#5C3A58', '#C5D7C5'],
+          borderRadius: 6,
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: { display: false },
+          title: {
+            display: true,
+            text: 'Income vs Expenses',
+            font: { size: 18 }
+          }
+        },
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+  </script>
+{% endblock %}

@@ -16,4 +16,20 @@
       <p>No transactions added yet.</p>
     {% endfor %}
   </div>
+  <form method="get" class="form">
+    <label><strong>Filter by Type:</strong></label>
+    <select name="type" onchange="this.form.submit()">
+      <option value="">All</option>
+      <option value="Income" {% if selected_type == 'Income' %}selected{% endif %}>Income</option>
+      <option value="Expense" {% if selected_type == 'Expense' %}selected{% endif %}>Expense</option>
+    </select>
+  
+    <label style="margin-left: 10px;"><strong>Sort by:</strong></label>
+    <select name="sort" onchange="this.form.submit()">
+      <option value="">Default</option>
+      <option value="amount" {% if selected_sort == 'amount' %}selected{% endif %}>Amount</option>
+      <option value="date" {% if selected_sort == 'date' %}selected{% endif %}>Date</option>
+    </select>
+  </form>
+  
 {% endblock %}

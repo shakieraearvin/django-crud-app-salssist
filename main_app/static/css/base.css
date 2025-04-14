@@ -198,3 +198,10 @@ select#status {
   border-radius: 6px;
   border: 1px solid #ccc;
 }
+.subtitle {
+  font-size: var(--font-reg);
+  color: var(--olive);
+  margin-top: -10px;
+  margin-bottom: 24px;
+}
+

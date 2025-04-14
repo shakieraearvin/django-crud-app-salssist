@@ -9,9 +9,12 @@
   <body>
 <header class="navbar">
   <div class="container nav-inner">
-    <a href="{% url 'home' %}" class="logo">Salssist</a>
+    <li><a href="{% url 'dashboard' %}">Home</a></li>
+
+
     <nav>
       <ul class="nav-links">
+        <li><a href="{% url 'dashboard' %}">Home</a></li>
         <li><a href="{% url 'license-index' %}">Licenses</a></li>
         <li><a href="{% url 'checklist-index' %}">Checklist</a></li>
         <li><a href="{% url 'accountant-index' %}">Accounting</a></li>
@@ -22,9 +25,7 @@
         </form>
         {% else %}
         <li><a href="{% url 'login' %}" class="btn secondary nav-small">Login</a></li>
-
       {% endif %}
-      
       </ul>
     </nav>
   </div>
