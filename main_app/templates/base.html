@@ -11,27 +11,30 @@
     <header class="navbar">
       <div class="container nav-inner">
         <a href="{% url 'home' %}" class="logo-link">
-          <img src="{% static 'images/salssist-logo.svg' %}" alt="Salssist Logo" class="logo-img">
+          <img src="{% static 'images/salssist-logo.svg' %}" alt="Salssist Logo" class="logo-img" />
         </a>
     
-        <nav>
-          <ul class="nav-links">
-        <li><a href="{% url 'dashboard' %}">DashBoard</a></li>
-        <li><a href="{% url 'license-index' %}">Licenses</a></li>
-        <li><a href="{% url 'checklist-index' %}">Checklist</a></li>
-        <li><a href="{% url 'accountant-index' %}">Accounting</a></li>
-        {% if user.is_authenticated %}
-        <form action="{% url 'logout' %}" method="POST" style="display:inline;">
-          {% csrf_token %}
-          <button type="submit" class="btn">Logout</button>
-        </form>
-        {% else %}
-        <li><a href="{% url 'login' %}" class="btn secondary nav-small">Login</a></li>
-      {% endif %}
-      </ul>
-    </nav>
-  </div>
-</header>
+        <button class="hamburger" onclick="toggleMenu()">☰</button>
+    
+        <nav class="nav-links-wrapper">
+          <ul class="nav-links" id="navMenu">
+            <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
+            <li><a href="{% url 'license-index' %}">Licenses</a></li>
+            <li><a href="{% url 'checklist-index' %}">Checklist</a></li>
+            <li><a href="{% url 'accountant-index' %}">Accounting</a></li>
+            {% if user.is_authenticated %}
+            <form action="{% url 'logout' %}" method="POST" style="display:inline;">
+              {% csrf_token %}
+              <button type="submit" class="btn logout-btn">Logout</button>
+            </form>
+            {% else %}
+            <li><a href="{% url 'login' %}" class="btn secondary nav-small">Login</a></li>
+            {% endif %}
+          </ul>
+        </nav>
+      </div>
+    </header>
+    
     <main class="container">
       {% block content %}
       {% endblock %}
@@ -40,5 +43,11 @@
     <footer>
       <p>&copy; 2025 Salssist</p>
     </footer>
+    <script>
+      function toggleMenu() {
+        const menu = document.getElementById('navMenu');
+        menu.classList.toggle('show');
+      }
+    </script>
   </body>
 </html>
