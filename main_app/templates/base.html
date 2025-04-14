@@ -9,12 +9,10 @@
   <body>
 <header class="navbar">
   <div class="container nav-inner">
-    <li><a href="{% url 'dashboard' %}">Home</a></li>
-
-
+    <ul class="home-link"><a href="{% url 'home' %}">Home</a></ul>
     <nav>
       <ul class="nav-links">
-        <li><a href="{% url 'dashboard' %}">Home</a></li>
+        <li><a href="{% url 'dashboard' %}">DashBoard</a></li>
         <li><a href="{% url 'license-index' %}">Licenses</a></li>
         <li><a href="{% url 'checklist-index' %}">Checklist</a></li>
         <li><a href="{% url 'accountant-index' %}">Accounting</a></li>

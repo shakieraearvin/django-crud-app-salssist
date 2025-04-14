@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
   <div class="page-header">
-    <h1>Quick Overview</h1>
+    <h1>Business Overview</h1>
     <p class="subtitle">Your beauty business at a glance ✨</p>
   </div>
 
@@ -23,6 +23,58 @@
     <p><strong>Net:</strong> ${{ net_total }}</p>
 
     <canvas id="accountingChart" width="400" height="200"></canvas>
+    <div class="card">
+        <h2>Recent Income</h2>
+        {% if income_items %}
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Amount</th>
+                <th>Date</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for item in income_items %}
+              <tr>
+                <td>{{ item.name }}</td>
+                <td>${{ item.amount }}</td>
+                <td>{{ item.date }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        {% else %}
+          <p>No income recorded yet.</p>
+        {% endif %}
+      </div>
+      
+      <div class="card">
+        <h2>Recent Expenses</h2>
+        {% if expense_items %}
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Amount</th>
+                <th>Date</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for item in expense_items %}
+              <tr>
+                <td>{{ item.name }}</td>
+                <td>${{ item.amount }}</td>
+                <td>{{ item.date }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        {% else %}
+          <p>No expenses recorded yet.</p>
+        {% endif %}
+      </div>
+      
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>

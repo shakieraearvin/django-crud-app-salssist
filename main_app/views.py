@@ -32,13 +32,13 @@ def home(request):
         'expense_total': expense_total
     })
 
+
 @login_required
 def dashboard(request):
     user = request.user
 
     total_licenses = License.objects.filter(user=user).count()
 
-    # Expiring in next 30 days
     today = timezone.now().date()
     soon = today + timedelta(days=30)
     expiring_licenses = License.objects.filter(user=user, exp_date__range=[today, soon]).count()
@@ -46,8 +46,11 @@ def dashboard(request):
     total_checklist = Checklist.objects.filter(user=user).count()
     completed_checklist = Checklist.objects.filter(user=user, status='C').count()
 
-    income_total = Accountant.objects.filter(user=user, type='Income').aggregate(total=models.Sum('amount'))['total'] or 0
-    expense_total = Accountant.objects.filter(user=user, type='Expense').aggregate(total=models.Sum('amount'))['total'] or 0
+    income_items = Accountant.objects.filter(user=user, type='I')
+    expense_items = Accountant.objects.filter(user=user, type='E')
+
+    income_total = income_items.aggregate(total=Sum('amount'))['total'] or 0
+    expense_total = expense_items.aggregate(total=Sum('amount'))['total'] or 0
     net_total = income_total - expense_total
 
     context = {
@@ -58,9 +61,12 @@ def dashboard(request):
         'income_total': income_total,
         'expense_total': expense_total,
         'net_total': net_total,
+        'income_items': income_items,
+        'expense_items': expense_items,
     }
 
     return render(request, 'dashboard.html', context)
+
 
 
 # Create your views here.
@@ -190,7 +196,7 @@ class AccountantList(LoginRequiredMixin, ListView):
         type_filter = self.request.GET.get('type')
         sort = self.request.GET.get('sort')
 
-        if type_filter in ['Income', 'Expense']:
+        if type_filter in ['I', 'E']:
             queryset = queryset.filter(type=type_filter)
 
         if sort == 'amount':
@@ -205,6 +211,9 @@ class AccountantList(LoginRequiredMixin, ListView):
         context['selected_type'] = self.request.GET.get('type', '')
         context['selected_sort'] = self.request.GET.get('sort', '')
         return context
+    
+        print("Filtered transactions:", queryset)
+
 
 
 class AccountantDetail(LoginRequiredMixin, DetailView):

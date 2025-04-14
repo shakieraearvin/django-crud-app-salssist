@@ -1,21 +1,25 @@
 {% extends 'base.html' %}
-
 {% block content %}
-  <h1>My Licenses</h1>
-  <a href="{% url 'license-create' %}" class="btn">+ Add License</a>
-
-  {% for license in licenses %}
-    <div class="card">
-      <h3><a href="{% url 'license-detail' license.pk %}">
-        {{ license.type }}
-      </a></h3>
-      <p>Status: {{ license.get_status_display }}</p>
-      <p>Expires: {{ license.exp_date }}</p>
-      <a href="{% url 'license-detail' license.id %}" class="btn">View</a>
+  <div class="container">
+    <div class="page-header">
+      <h1>Licenses</h1>
+      <a href="{% url 'license-create' %}" class="btn plum">+ Add License</a>
     </div>
-  {% empty %}
-    <p>No licenses yet.</p>
-  {% endfor %}
+
+    <!-- Spacing below the button -->
+    <div class="spacer"></div>
+
+    {% for license in licenses %}
+      <div class="card">
+        <h2>{{ license.type }}</h2>
+        <span class="status-tag">{{ license.get_status_display }}</span>
+        <p><strong>Expires:</strong> {{ license.exp_date }}</p>
+        <a href="{% url 'license-detail' license.pk %}" class="btn secondary">View</a>
+      </div>
+    {% empty %}
+      <p>No licenses added yet.</p>
+    {% endfor %}
+  </div>
 {% endblock %}
 
 

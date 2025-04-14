@@ -205,3 +205,51 @@ select#status {
   margin-bottom: 24px;
 }
 
+.home-link a {
+  font-size: var(--font-l);
+  font-weight: 600;
+  color: var(--charcoal);
+  text-decoration: none;
+  padding: 6px 14px;
+  border-radius: 6px;
+  background-color: var(--sage);
+  transition: background-color 0.3s ease, color 0.3s ease;
+  display: inline-block;
+}
+
+.home-link a:hover {
+  background-color: var(--button-bg-hover);
+  color: var(--plum);
+}
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+}
+
+.data-table th,
+.data-table td {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+  text-align: left;
+  font-size: 1.4rem;
+}
+
+.data-table th {
+  background-color: var(--sage);
+  color: var(--charcoal);
+}
+
+.data-table tr:hover {
+  background-color: #f0f0f0;
+}
+.filter-form {
+  margin-bottom: 24px;
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.spacer {
+  margin-bottom: 24px;
+}
