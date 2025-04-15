@@ -6,7 +6,7 @@
   </div>
 
   <div class="card license-detail-card">
-  {% comment %} <h2>{{ license.type }}</h2> {% endcomment %}
+
   <p><strong>Cost:</strong> ${{ license.cost }}</p>
   <p><strong>Issued:</strong> {{ license.issue_date }}</p>
   <p><strong>Expires:</strong> {{ license.exp_date }}</p>
@@ -19,10 +19,10 @@
 
     <div class="action-buttons" style="margin-top:">
       <a href="{% url 'license-update' license.pk %}" class="btn plum">
-        ✏️ Edit
+        Edit
       </a>
       <a href="{% url 'license-delete' license.pk %}" class="btn sage">
-        🗑️ Delete
+        Delete
       </a>
       <a href="{% url 'license-index' %}" class="btn secondary">
         ← Back

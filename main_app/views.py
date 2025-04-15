@@ -68,8 +68,6 @@ def dashboard(request):
     return render(request, 'dashboard.html', context)
 
 
-
-# Create your views here.
 class LicenseList(LoginRequiredMixin, ListView):
     model = License
     template_name = 'licenses/index.html'
@@ -266,7 +264,7 @@ def signup(request):
         if form.is_valid():
             user = form.save()
             login(request, user)
-            return redirect('license-index')  # or use 'home' if you create one
+            return redirect('license-index') 
         else:
             error_message = 'Invalid sign up - please try again.'
     else:

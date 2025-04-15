@@ -165,7 +165,6 @@ button[type="submit"] {
   margin-right: 10px;
 }
 
-/* STATUS TAGS */
 .status-tag {
   display: inline-block;
   padding: 4px 10px;
@@ -177,14 +176,13 @@ button[type="submit"] {
   text-transform: capitalize;
 }
 
-/* ACTION BUTTONS */
+
 .action-buttons {
   display: flex;
   gap: 12px;
   margin-top: 20px;
 }
 
-/* PAGE HEADER */
 .page-header {
   margin-bottom: 24px;
 }
@@ -193,7 +191,7 @@ button[type="submit"] {
   font-size: var(--font-xl);
   margin: 0;
 }
-/* Small nav button */
+
 .btn.nav-small {
   padding: 6px 12px;
   font-size: 1.4rem;

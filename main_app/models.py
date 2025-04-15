@@ -1,9 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 
-# Create your models here.
 
-# License model
 class License(models.Model):
     STATUS_CHOICES = (
         ('A', 'Active'),
@@ -26,7 +24,7 @@ class License(models.Model):
     def __str__(self):
         return f"{self.type} ({self.get_status_display()})"
 
-# Accountant model 
+
 class Accountant(models.Model):
     TYPE_CHOICES = (
         ('I', 'Income'),
@@ -50,7 +48,7 @@ class Accountant(models.Model):
         return f"{self.name} | {self.get_type_display()} - ${self.amount} on {self.date}"
 
     
-    # Checklist model 
+  
 class Checklist(models.Model):
     STATUS_CHOICES = (
         ('R', 'Required'),
